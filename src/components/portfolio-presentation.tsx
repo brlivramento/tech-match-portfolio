@@ -35,6 +35,18 @@ export function PortfolioPresentation({
     );
   }, [search, technologies]);
 
+  const filteredProjects = useMemo(() => {
+    if (selectedTechnologyIds.length === 0) {
+      return projects;
+    }
+
+    return projects.filter((project) =>
+      project.technologyIds.some((technologyId) =>
+        selectedTechnologyIds.includes(technologyId),
+      ),
+    );
+  }, [projects, selectedTechnologyIds]);
+
   function toggleTechnology(id: string) {
     setSelectedTechnologyIds((currentIds) =>
       currentIds.includes(id)
@@ -157,12 +169,12 @@ export function PortfolioPresentation({
               <p className="eyebrow">PROJECT EXPERIENCE</p>
             </div>
 
-            <span>{projects.length} projects</span>
+            <span>{filteredProjects.length} projects</span>
           </section>
 
-          {projects.length > 0 ? (
+          {filteredProjects.length > 0 ? (
             <section className="project-grid" aria-label="Projetos">
-              {projects.map((project) => {
+              {filteredProjects.map((project) => {
                 const projectTechnologies = getProjectTechnologies(project);
 
                 return (
@@ -211,7 +223,11 @@ export function PortfolioPresentation({
             <section className="empty-state">
               <FiFolder aria-hidden="true" />
               <h2>Nenhum projeto encontrado</h2>
-              <p>Confira os registros visíveis no database Projects.</p>
+              <p>
+                {selectedTechnologyIds.length > 0
+                  ? "Nenhum projeto possui as tecnologias selecionadas."
+                  : "Confira os registros visíveis no database Projects."}
+              </p>
             </section>
           )}
         </>
