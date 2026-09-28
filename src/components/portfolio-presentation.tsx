@@ -59,18 +59,14 @@ export function PortfolioPresentation({
 
   return (
     <main>
-      <header>
-        <div>
-          <p className="eyebrow">INTERVIEW PORTFOLIO</p>
-          <h1>Technology Match</h1>
-          <p className="subtitle">
-            Selecione as tecnologias da vaga e encontre os projetos compatíveis.
-          </p>
-        </div>
-
-        <div className="selection-summary">
+      <header className="app-header">
+        <div
+          className={`selection-summary ${
+            activeTab === "projects" ? "is-hidden" : ""
+          }`}
+        >
           <strong>{selectedTechnologyIds.length}</strong>
-          <span>selecionadas</span>
+          <span>stacks</span>
         </div>
       </header>
 
@@ -159,10 +155,9 @@ export function PortfolioPresentation({
           <section className="projects-heading">
             <div>
               <p className="eyebrow">PROJECT EXPERIENCE</p>
-              <h2>Projetos</h2>
             </div>
 
-            <span>{projects.length} cadastrados</span>
+            <span>{projects.length} projects</span>
           </section>
 
           {projects.length > 0 ? (

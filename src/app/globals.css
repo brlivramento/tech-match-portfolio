@@ -10,6 +10,9 @@
   --blue-soft: #dbeafe;
   --blue-strong: #1d4ed8;
   --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  --soft: var(--soft);
+  --line-hover: var(--line-hover);
+  --match: var(--match);
 }
 
 * {
@@ -39,12 +42,10 @@ main {
   padding: 72px 0;
 }
 
-header {
+.app-header {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 32px;
-  margin-bottom: 40px;
+  justify-content: flex-end;
+  margin-bottom: -60px;
 }
 
 .eyebrow {
@@ -75,7 +76,7 @@ h1 {
   min-width: 120px;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #bfdbfe;
+  border: 1px solid var(--match);
   border-radius: 18px;
   background: #ffffff;
   padding: 18px;
@@ -118,7 +119,7 @@ h1 {
 }
 
 .tabs button:hover {
-  background: #f8fafc;
+  background: var(--soft);
   color: var(--ink);
 }
 
@@ -181,8 +182,8 @@ h1 {
 }
 
 .toolbar button:hover:not(:disabled) {
-  border-color: #93c5fd;
-  background: #f8fafc;
+  border-color: var(--line-hover);
+  background: var(--soft);
   color: var(--blue-strong);
 }
 
@@ -220,7 +221,7 @@ h1 {
 
 .technology-badge:hover {
   transform: translateY(-3px);
-  border-color: #93c5fd;
+  border-color: var(--line-hover);
   box-shadow: var(--shadow);
 }
 
@@ -236,7 +237,7 @@ h1 {
   left: -12px;
   z-index: 0;
   height: 17px;
-  background: #93c5fd;
+  background: var(--line-hover);
   content: "";
   opacity: 0.8;
   transform: rotate(-1.5deg);
@@ -284,7 +285,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px dashed #bfdbfe;
+  border: 1px dashed var(--match);
   border-radius: 20px;
   background: #ffffff;
   padding: 48px 24px;
@@ -350,7 +351,7 @@ h1 {
 
 .project-card:hover {
   transform: translateY(-5px);
-  border-color: #93c5fd;
+  border-color: var(--line-hover);
   box-shadow: var(--shadow);
 }
 
@@ -410,7 +411,7 @@ h1 {
 .project-technologies span,
 .modal-technologies span {
   border-radius: 999px;
-  background: #f8fafc;
+  background: var(--soft);
   padding: 5px 8px;
   color: #475569;
   font-size: 0.72rem;
@@ -419,7 +420,7 @@ h1 {
 
 .project-technologies span.is-match,
 .modal-technologies span.is-match {
-  background: #bfdbfe;
+  background: var(--match);
   color: #1d4ed8;
 }
 
@@ -436,7 +437,7 @@ h1 {
 
 .project-modal {
   position: relative;
-  width: min(760px, 100%);
+  width: min(960px, 100%);
   overflow: hidden;
   border-radius: 22px;
   background: #ffffff;
@@ -541,4 +542,18 @@ h1 {
   .modal-content {
     padding: 26px 20px;
   }
+}
+
+button:focus-visible {
+  outline: 3px solid var(--blue-soft);
+  outline-offset: 3px;
+}
+
+.project-cover img,
+.modal-cover img {
+  display: block;
+}
+
+.selection-summary.is-hidden {
+  visibility: hidden;
 }

@@ -34,18 +34,10 @@ export function TechnologySelector({
 
   return (
     <main>
-      <header>
-        <div>
-          <p className="eyebrow">INTERVIEW PORTFOLIO</p>
-          <h1>Technology Match</h1>
-          <p className="subtitle">
-            Selecione as tecnologias da vaga e encontre os projetos compatíveis.
-          </p>
-        </div>
-
+      <header className="app-header">
         <div className="selection-summary">
           <strong>{selectedIds.length}</strong>
-          <span>selecionadas</span>
+          <span>stacks</span>
         </div>
       </header>
 
