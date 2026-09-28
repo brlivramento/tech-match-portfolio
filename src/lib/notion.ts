@@ -10,9 +10,14 @@ function getRequiredEnvironmentVariable(name: string): string {
   return value;
 }
 
-export const notion = new Client({
-  auth: getRequiredEnvironmentVariable("NOTION_API_KEY"),
-});
+export function getNotionClient(): Client {
+  return new Client({
+    auth: getRequiredEnvironmentVariable("NOTION_API_KEY"),
+  });
+}
 
-export const notionTechnologiesDataSourceId =
-  getRequiredEnvironmentVariable("NOTION_TECHNOLOGIES_DATA_SOURCE_ID");
+export function getNotionTechnologiesDataSourceId(): string {
+  return getRequiredEnvironmentVariable(
+    "NOTION_TECHNOLOGIES_DATA_SOURCE_ID"
+  );
+}
