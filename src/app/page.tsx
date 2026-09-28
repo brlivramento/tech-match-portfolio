@@ -1,10 +1,19 @@
-import { TechnologySelector } from "@/components/technology-selector";
+import { PortfolioPresentation } from "@/components/portfolio-presentation";
+import { getProjects } from "@/lib/projects";
 import { getTechnologies } from "@/lib/technologies";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const technologies = await getTechnologies();
+  const [technologies, projects] = await Promise.all([
+    getTechnologies(),
+    getProjects(),
+  ]);
 
-  return <TechnologySelector technologies={technologies} />;
+  return (
+    <PortfolioPresentation
+      technologies={technologies}
+      projects={projects}
+    />
+  );
 }
