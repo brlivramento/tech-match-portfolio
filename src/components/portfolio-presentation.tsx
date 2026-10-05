@@ -10,6 +10,8 @@ import {
 } from "react-icons/fi";
 import type { Project } from "@/data/projects";
 import type { Technology } from "@/data/technologies";
+import { ProjectDescription } from "./project-description";
+import { ImageWithLoading } from "./image-with-loading";
 
 type PortfolioPresentationProps = {
   technologies: Technology[];
@@ -186,7 +188,7 @@ export function PortfolioPresentation({
                   >
                     <div className="project-cover">
                       {project.coverImageUrl ? (
-                        <img src={project.coverImageUrl} alt="" />
+                        <ImageWithLoading src={project.coverImageUrl} />
                       ) : (
                         <FiFolder aria-hidden="true" />
                       )}
@@ -256,22 +258,53 @@ export function PortfolioPresentation({
             </button>
 
             {openedProject.coverImageUrl && (
-              <div className="modal-cover">
-                <img src={openedProject.coverImageUrl} alt="" />
+              <div className="modal-hero">
+                <ImageWithLoading src={openedProject.coverImageUrl} />
+
+                <div className="modal-hero-overlay">
+                  <div className="modal-hero-content">
+                    <p className="project-company">
+                      {openedProject.company}
+                    </p>
+
+                    <h2 id="project-modal-title">
+                      {openedProject.name}
+                    </h2>
+
+                    <p className="project-period">
+                      {openedProject.startYear ?? "—"} —{" "}
+                      {openedProject.endYear ?? "Atual"}
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
 
-            <div className="modal-content">
-              <p className="project-company">{openedProject.company}</p>
-              <h2 id="project-modal-title">{openedProject.name}</h2>
-              <p className="project-period">
-                {openedProject.startYear ?? "—"} —{" "}
-                {openedProject.endYear ?? "Atual"}
-              </p>
+              {(openedProject.segment || openedProject.website) && (
+                <div className="project-meta">
+                  {openedProject.segment && (
+                    <span className="project-segment">
+                      {openedProject.segment}
+                    </span>
+                  )}
 
-              <p className="project-description">
-                {openedProject.description}
-              </p>
+                  {openedProject.website && (
+                    <a
+                      className="project-website"
+                      href={openedProject.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {openedProject.website} ↗
+                    </a>
+                  )}
+                </div>
+              )}
+
+              <div className="modal-content">
+              <ProjectDescription
+                description={openedProject.description}
+              />
 
               <h3>Tecnologias utilizadas</h3>
 
@@ -279,7 +312,9 @@ export function PortfolioPresentation({
                 {getProjectTechnologies(openedProject).map((technology) => (
                   <span
                     className={
-                      isTechnologySelected(technology.id) ? "is-match" : ""
+                      isTechnologySelected(technology.id)
+                        ? "is-match"
+                        : ""
                     }
                     key={technology.id}
                   >

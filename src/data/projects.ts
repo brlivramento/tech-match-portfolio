@@ -5,6 +5,8 @@ export type Project = {
   startYear?: number;
   endYear?: number;
   description: string;
+  segment: string;
+  website: string;
   coverImageUrl?: string;
   technologyIds: string[];
 };

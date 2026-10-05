@@ -14,6 +14,7 @@ type NotionProperty = {
   number?: number | null;
   files?: NotionFile[];
   relation?: Array<{ id: string }>;
+  url?: string | null;
 };
 
 type NotionProperties = Record<string, NotionProperty>;
@@ -31,6 +32,13 @@ function getText(
   return [...(property.title ?? []), ...(property.rich_text ?? [])]
     .map((item) => item.plain_text)
     .join("");
+}
+
+function getUrl(
+  properties: NotionProperties,
+  propertyName: string,
+): string {
+  return properties[propertyName]?.url ?? "";
 }
 
 function getSelect(
@@ -93,6 +101,8 @@ export async function getProjects(): Promise<Project[]> {
         startYear: getNumber(properties, "Start Year"),
         endYear: getNumber(properties, "End Year"),
         description: getText(properties, "Description"),
+        segment: getText(properties, "Segment"),
+        website: getText(properties, "Website"),
         coverImageUrl: getCoverImageUrl(properties),
         technologyIds: getTechnologyIds(properties),
       };
